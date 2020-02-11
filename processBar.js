@@ -1,14 +1,16 @@
+
+const test = require('./testCase');
 const unqiueValues = function unqiueValues(arr) {
     return arr.filter((item, index) => {
         return arr.indexOf(item) === index
     });
 }
 
-const superFunctionalStrings = function superFunctionalStrings(str) {
+const superFunctional = function superFunctional(str) {
     let p = str.length;
     let d = (unqiueValues(str.split(''))).length;
     
-    return Math.pow(p, d) % (Math.pow(10,9)+ 7);
+    return BigInt(Math.pow(p, d) % (Math.pow(10,9)+ 7));
 }
 
 const subString = function subString(str, n)  
@@ -36,17 +38,24 @@ const subString = function subString(str, n)
     return result;
 } 
 
-let str = 'abc';
-let result = unqiueValues((subString(str,str.length)));
 
 
-console.log(result);
-let sum = 0;
 
-for (let item of result) {
-    sum +=superFunctionalStrings(item);
+function superFunctionalStrings(s) {
+    /*
+     * Write your code here.
+     */
+    let result = unqiueValues((subString(s, s.length)));
+    
+
+    let sum = 0;
+    // console.log(result.length);
+    for (let item of result) {
+        sum += superFunctional(item);
+    }
+    return sum;
 
 }
 
-
-console.log(sum);
+console.log(subString(test.test[0],test.test[0].length))
+// console.log(superFunctionalStrings(test.test[0]));
